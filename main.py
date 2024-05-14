@@ -11,13 +11,13 @@ def main():
     }
 
     while True:
-        # 显示所有游戏选项
+        # Show all game options
         print("\n -------------------------------------------")
         print("Available games:")
         for key, value in games.items():
-            print(f"{key}: {value[:-3]}")  # 输出游戏名，去掉.py后缀
+            print(f"{key}: {value[:-3]}")  # Print the name of the game without the.py suffix
 
-        # 获取用户输入
+        # Get user input
         choice = input("Which game would you like to play? Enter the number or 'exit' to quit: ")
         if choice.lower() == 'exit':
             print("Exiting game center. Goodbye!")
