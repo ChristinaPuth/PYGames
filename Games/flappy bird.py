@@ -3,25 +3,25 @@ import pygame
 import sys
 import random
 
-# 初始化 Pygame
+# Initialize Pygame
 pygame.init()
 
-# 设置窗口大小
+# Set the window size
 WIN_WIDTH = 400
 WIN_HEIGHT = 600
 win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
 pygame.display.set_caption("Flappy Bird")
 
-# 设置颜色
+# set colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 YELLOW=(255, 255, 0)
 RED=(255, 0, 0)
 
-# 设置字体
+# set font
 font = pygame.font.Font(None, 36)
 
-# 设置小鸟参数
+# Setting birdie parameters
 bird_width = 40
 bird_height = 30
 bird_x = 50
@@ -31,13 +31,13 @@ jump = -7
 bird_velocity = 0
 score = 0
 
-# 设置管道参数
+# Setting pipeline parameters
 pipe_width = 50
 pipe_gap = 200
 pipe_velocity = 3
 pipe_list = []
 
-# 加载小鸟图片
+#Loading the bird image
 bird_img = pygame.image.load('/Users/pusi/PycharmProjects/PYGames1/Games/bird.png').convert_alpha()
 bird_img = pygame.transform.scale(bird_img, (bird_width, bird_height))
 
