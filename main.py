@@ -23,7 +23,7 @@ def main():
             print("Exiting game center. Goodbye!")
             break
 
-        # 启动对应的游戏脚本
+        # launch the corresponding game script
         if choice in games:
 
             print(f"\n ---{games[choice][:-3]}----------------------------------------")
