@@ -1,50 +1,49 @@
 import random
 import wordandmeaning
+
 print("Hangman game .....................")
 print("Guessing was never so much fun.............. ")
-list1=[""]
+
 while True:
- j=random.randint(0,9)
- str1=wordandmeaning.word(j)
- str2=wordandmeaning.meaning1(j)
- print("Hint for the word = ",str2)
- i=1
- n=len(str1)
- b=0
- count=0
- lists=[]
- while i<=n:
-    lists.append("?")
-    i=i+1
- i=1
- while i<=4:
-    char=input()
-    while True:
-      a=str1.find(char, b, len(str1))
-      if(a!=-1):
-#        print(a)
-        lists[a]=char
-#        print("".join(lists))
-        b=a+1
-        count=1
-        continue
-      else:
-        if(count==1):
-            i=i-1
+    j = random.randint(0, 9)
+    str1 = wordandmeaning.word(j)
+    str2 = wordandmeaning.meaning1(j)
+    print("Hint for the word = ", str2)
+
+    n = len(str1)
+    lists = ['?'] * n  # Simplified way to initialize the list
+    attempts = 4
+
+    while attempts > 0:
+        char = input("Guess a letter or type 'exit' to quit: ")
+        if char.lower() == 'exit':
+            print("Exiting game...")
+            exit()
+
+        found = False
+        for idx in range(len(str1)):
+            if str1[idx] == char:
+                lists[idx] = char
+                found = True
+
+        print("".join(lists))
+
+        if "".join(lists) == str1:
+            print("You got the word, Congratulations :)")
+            break
+
+        if not found:
+            attempts -= 1
+            print(f"No such letter. You have {attempts} attempts left.")
+
+    if "".join(lists) != str1:
+        print("""(x x)
+|
+|
+/\\ ,Hanged..............""")
+        print("The word was ", str1)
+
+    # If you want the game to loop, you could ask here if they want to play another round
+    play_again = input("Play again? (yes/no): ")
+    if play_again.lower() != 'yes':
         break
-    print("".join(lists))
-    b=0
-    count=0
-    i=i+1
-    c = "".join(lists)
-    if(c==str1):
-        break
- c="".join(lists)
- if(c==str1):
-     print("You got the word ,Congragulations :)")
- else:
-     print("""(x x)
-  |
-  |
-  /\\ ,Hanged..............""")
-     print("The word was ",str1)

@@ -256,14 +256,6 @@ def isSpaceFree(board, move):
     # Return true if the passed move is free on the passed board.
     return board[move] == ' '
 
-def getPlayerMove(board):
-    # Let the player type in their move.
-    move = ' '
-    while move not in '1 2 3 4 5 6 7 8 9'.split() or not isSpaceFree(board, int(move)):
-        print('What is your next move? (1-9)')
-        move = input()
-    return int(move)
-
 def chooseRandomMoveFromList(board, movesList):
     # Returns a valid move from the passed list on the passed board.
     # Returns None if there is no valid move.
@@ -322,8 +314,21 @@ def isBoardFull(board):
 
 print('Welcome to Tic Tac Toe!')
 
+def getPlayerMove(board):
+    # Let the player type in their move or exit.
+    while True:
+        print('What is your next move? (1-9) or type "exit" to quit:')
+        move = input()
+        if move.lower() == 'exit':
+            return 'exit'
+        if move in '1 2 3 4 5 6 7 8 9'.split() and isSpaceFree(board, int(move)):
+            return int(move)
+        print('Invalid move. Please try again.')
+
+# Modify the main game loop to handle 'exit' command.
+print('Welcome to Tic Tac Toe!')
+
 while True:
-    # Reset the board
     theBoard = [' '] * 10
     playerLetter, computerLetter = inputPlayerLetter()
     turn = whoGoesFirst()
@@ -332,9 +337,12 @@ while True:
 
     while gameIsPlaying:
         if turn == 'player':
-            # Player’s turn.
             drawBoard(theBoard)
             move = getPlayerMove(theBoard)
+            if move == 'exit':
+                print('Exiting the game. Goodbye!')
+                gameIsPlaying = False
+                break  # Break out of the game loop
             makeMove(theBoard, playerLetter, move)
 
             if isWinner(theBoard, playerLetter):
@@ -350,7 +358,6 @@ while True:
                     turn = 'computer'
 
         else:
-            # Computer’s turn.
             move = getComputerMove(theBoard, computerLetter)
             makeMove(theBoard, computerLetter, move)
 
@@ -366,5 +373,6 @@ while True:
                 else:
                     turn = 'player'
 
-    if not playAgain():
+    if not gameIsPlaying or not playAgain():
         break
+
